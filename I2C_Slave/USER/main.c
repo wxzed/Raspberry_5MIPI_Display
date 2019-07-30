@@ -13,7 +13,7 @@
 u8 buf[33];
 u8 i,j;
 u8 ICN6211_REG_ADD[25]={0x20,0x21,0x22,0x23,0x24,0x25,0x26,0x27,0x28,0x29,0x34,0x36,0x86,0xB5,0x5C,0x2A,0x56,0x6B,0x69,0x10,0x11,0xB6,0x51,0x09};
-u8 ICN6211_REG_DATA[25]={0x20,0xE0,0x13,0x28,0x30,0x58,0x00,0x0D,0x03,0x20,0x80,0x28,0x28,0xA0,0xFF,0x01,0x90,0x71,0x25,0x40,0x88,0x20,0x20,0x10};
+u8 ICN6211_REG_DATA[25]={0x20,0xE0,0x13,0x28,0x30,0x58,0x00,0x0D,0x03,0x20,0x80,0x28,0x28,0xA0,0xFF,0x01,0x90,0x71,0x2A,0x40,0x88,0x20,0x20,0x10};
 TouchData MyTouchData;
 static void InitShow(){
 	for(i = 0; i<25;i++){
@@ -122,24 +122,24 @@ void RCC1_Configuration(void)
 	 
 	RCC1_Configuration();
 	 RCC_Configuration();
-	 	delay_init();	    	 //ÑÓÊ±º¯Êý³õÊ¼»¯	 
+	 	delay_init();	    	 //å»¶æ—¶å‡½æ•°åˆå§‹åŒ–	 
 	//GPIO_Configuration();
 	LED_Init();
 	//TIM3_Configuration();
-	NVIC_Configuration(); 	 //ÉèÖÃNVICÖÐ¶Ï·Ö×é2:2Î»ÇÀÕ¼ÓÅÏÈ¼¶£¬2Î»ÏìÓ¦ÓÅÏÈ¼¶
+	NVIC_Configuration(); 	 //è®¾ç½®NVICä¸­æ–­åˆ†ç»„2:2ä½æŠ¢å ä¼˜å…ˆçº§ï¼Œ2ä½å“åº”ä¼˜å…ˆçº§
 	I2C2_Init();
 	I2C1_Init();
 	delay_ms(50);
 	Soft_IIC_Init();
 	delay_ms(50);
-	//uart_init(115200);	 //´®¿Ú³õÊ¼»¯Îª9600
+	//uart_init(115200);	 //ä¸²å£åˆå§‹åŒ–ä¸º9600
 	InitTouchData();
 	InitShow();
 	BACKLIGHT =1;
 		while(1){
 		  i = 0,j=0;
 			Soft_IIC_Start();
-		 	Soft_IIC_Send_Byte(0x70);//¶Á²Ù×÷
+		 	Soft_IIC_Send_Byte(0x70);//è¯»æ“ä½œ
 			while(Soft_IIC_Wait_Ack()){
 				Soft_IIC_Send_Byte(0x70);
 			}
@@ -159,7 +159,7 @@ void RCC1_Configuration(void)
 			}
 			buf[32] = Soft_IIC_Read_Byte(0);
 			Soft_IIC_Stop();
-			if((buf[2] == 0x00) || (buf[2] == 0xFF)){//Ã»ÓÐ±»´¥Ãþ
+			if((buf[2] == 0x00) || (buf[2] == 0xFF)){//æ²¡æœ‰è¢«è§¦æ‘¸
 				MyTouchData.point = buf[2];
 			}else{
 					//BACKLIGHT = 1;
